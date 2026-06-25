@@ -7,6 +7,12 @@ server keeps every universe **ticking whether anyone is watching or
 not**, so the galaxy lives on while you sleep. Accounts, 6-letter invite
 codes, and SQLite persistence are built in.
 
+<p align="center">
+  <img src="starsphere_01.PNG" alt="STARSPHERE ONLINE — the command dashboard: resources, construction, research, fleet, and a live event feed" width="100%">
+  <br>
+  <sub><i>The command dashboard — resources, construction, research, and a live event feed.</i></sub>
+</p>
+
 ---
 
 ## The game
@@ -110,6 +116,33 @@ Choose when you create a round:
 
 - **Fast** — frequent ticks, a brisk session.
 - **Authentic** — ~1 tick/hour, a slow-burn game you check on over days.
+
+---
+
+## In action
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="starsphere_02.PNG" alt="Fleet production — shipyard queue and ship roster">
+      <br><sub><b>Fleet &amp; shipyard</b> — parallel build lines and the full ship roster, each with initiative, armor, damage, and counters.</sub>
+    </td>
+    <td width="50%" valign="top">
+      <img src="starsphere_03.PNG" alt="Intel — scans and covert ops">
+      <br><sub><b>Intel</b> — scan a rival's planet and fleet, run covert ops, and watch for incoming raids.</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="starsphere_04.PNG" alt="Planet rankings">
+      <br><sub><b>Rankings</b> — your standing against every empire in the universe.</sub>
+    </td>
+    <td width="50%" valign="top">
+      <img src="starsphere_05.PNG" alt="Battle report — attacker versus defender">
+      <br><sub><b>Battle report</b> — raids resolved class by class, attacker against defender.</sub>
+    </td>
+  </tr>
+</table>
 
 ---
 
