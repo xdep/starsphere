@@ -5,7 +5,7 @@ cluster** of one persistent universe — mine asteroids, build a fleet,
 climb the tech tree, and outgrow 199 AI rivals across 25 clusters. The
 server keeps every universe **ticking whether anyone is watching or
 not**, so the galaxy lives on while you sleep. Accounts, 6-letter invite
-codes, and SQLite persistence are built in.
+codes, and SQLite persistence are built in. Can be played single as well. 
 
 <p align="center">
   <img src="starsphere_01.PNG" alt="STARSPHERE ONLINE — the command dashboard: resources, construction, research, fleet, and a live event feed" width="100%">
