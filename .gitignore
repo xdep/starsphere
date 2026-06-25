@@ -1,0 +1,21 @@
+# --- Database (LOCAL ONLY — contains user accounts + live session tokens) ---
+sphere.db
+sphere.db-shm
+sphere.db-wal
+*.sqlite
+*.sqlite3
+
+# --- Dependencies (regenerate with `npm install`; native binaries don't port) ---
+node_modules/
+
+# --- Secrets / environment ---
+.env
+.env.*
+
+# --- Tunnel & runtime logs ---
+sphere-tunnel.*.log
+*.log
+
+# --- OS / editor cruft ---
+.DS_Store
+*.swp
