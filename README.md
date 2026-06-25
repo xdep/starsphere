@@ -1,9 +1,117 @@
 # STARSPHERE ONLINE
 
-Multiplayer STARSPHERE: up to **8 friends share the home cluster** of one
-universe, with accounts, invite codes, and a SQLite-backed server that
-keeps ticking whether anyone is watching or not. The single-player
-`../starsphere.html` is untouched and keeps working offline.
+A multiplayer space-strategy game. Up to **8 commanders share the home
+cluster** of one persistent universe — mine asteroids, build a fleet,
+climb the tech tree, and outgrow 199 AI rivals across 25 clusters. The
+server keeps every universe **ticking whether anyone is watching or
+not**, so the galaxy lives on while you sleep. Accounts, 6-letter invite
+codes, and SQLite persistence are built in.
+
+---
+
+## The game
+
+You rule one planet. Every **tick** your asteroids produce resources,
+your construction and research queues advance, and any fleets in flight
+move one step closer. A standard round runs **1008 ticks**; you win by
+out-building and out-fighting everyone else before it ends.
+
+### Resources
+
+| Resource | Mined from | Used for |
+|---|---|---|
+| **Ore** | Ore asteroids | The bulk of every building and ship |
+| **Crystal** | Crystal asteroids | Tech, advanced hulls, scanning |
+| **Flux** | Flux asteroids | Capital ships, covert ops, high-tech gear |
+
+Claim more asteroids to raise income; each additional roid costs more
+than the last, so expansion is a constant trade-off against military.
+
+### Factions
+
+Pick a faction when you found or join a round — each bends the game a
+different way:
+
+| Faction | Identity | Perk |
+|---|---|---|
+| **Aurel Combine** | Industrial builders | Construction −20%, +25% ship armor |
+| **Vexari Corsairs** | Fast raiders | All fleet ETAs −1, −15% armor, +10% light-ship damage |
+| **Mistveil Syndicate** | Spies & thieves | Magpie steal +20%, free signal amp & distorter |
+| **Korvan Hegemony** | Heavy warfleet | +20% ship damage, +15% ship cost |
+
+### Buildings
+
+Ten structures, each up to **level 10** — economy (Ore Refinery, Crystal
+Array, Flux Siphon), the **Shipyard** (level 6 unlocks a second build
+line), the **Astro Lab** (research), intelligence (Signal Spire, Static
+Veil, Watch Bureau), and defense (Deep Vault to protect your stockpile,
+Orbital Bastion for static guns).
+
+### Research — five trees
+
+| Tree | What it buys |
+|---|---|
+| **Propulsion** | Faster fleet ETAs (10 → 5) |
+| **Hulls** | Unlock bigger ships: Corvette → Frigate → Destroyer → Cruiser → Capital |
+| **Extraction** | More income per asteroid + extra construction slots |
+| **Signals** | Scanning: planet, fleet, news, incoming-fleet detection |
+| **Shadow Ops** | Covert ops (Pilfer, Sabotage, Unrest) + the Magpie thief ship |
+
+### The fleet
+
+Eight ship classes form an **initiative-and-counter** chain — each
+targets specific enemy classes, so composition matters as much as raw
+size:
+
+| Class | Role |
+|---|---|
+| **Scout** | Cheap eyes; hunts harvesters |
+| **Corvette** | Light line ship |
+| **Frigate** | Mid-weight; kills corvettes & magpies |
+| **Magpie** | Thief — steals enemy ships instead of dealing damage |
+| **Destroyer** | Heavy; hunts capitals & frigates |
+| **Cruiser** | Heavier still |
+| **Capital** | The apex hull — late-game payoff |
+| **Harvester** | Non-combat miner |
+
+Every faction flies the same classes under its own ship names (the Aurel
+*Citadel*, the Vexari *Hurricane*, the Korvan *Sovereign*…).
+
+### Conflict & intrigue
+
+- **Raids** send a fleet across the map; combat resolves by initiative
+  order and counter-matchups, with Magpies grappling ships home instead
+  of destroying them.
+- **Scans** reveal a rival's planet, fleet, news, or the fleets inbound
+  to your own galaxy — countered by Static Veil.
+- **Covert ops** — Pilfer, Sabotage, Unrest — run through Shadow Ops;
+  the Watch Bureau improves your odds of catching enemy agents.
+- **Raid protection:** every commander gets a **72-tick** shield from the
+  moment they join, so late arrivals aren't farmed on sight.
+
+### Round formats
+
+| Format | Length | Protection | Notes |
+|---|---|---|---|
+| **Standard** | 1008 ticks | 72 | The full game |
+| **Blitz** | 360 ticks | 24 | ×1.6 research, empires start a few rungs up — fast hulls, capitals still a late payoff |
+
+### Difficulty
+
+| Level | AI rivals | Economy | Raid pressure |
+|---|---|---|---|
+| **Chill** | 4 | ×0.70 | ×0.70 |
+| **Normal** | 10 | ×1.00 | ×1.00 |
+| **Brutal** | 18 | ×1.35 | ×1.40 |
+
+### Tick pace
+
+Choose when you create a round:
+
+- **Fast** — frequent ticks, a brisk session.
+- **Authentic** — ~1 tick/hour, a slow-burn game you check on over days.
+
+---
 
 ## Run it
 
@@ -20,19 +128,18 @@ ephemeral — each start gets a new one. Accounts and universes live in
 `sphere.db` on this machine, so a changing URL loses nothing.
 
 Open http://localhost:8777 — register, then either **create a round**
-(you pick the tick pace: 1 tick/hour or 1 tick/min, and you get a 6-letter
+(pick the tick pace, faction, difficulty, and format; you get a 6-letter
 invite code) or **join a friend's round** with their code. Joiners take
-home-cluster slots in order; unfilled slots stay AI. Late joiners get
-their own 72-tick raid-protection window from the moment they join.
+home-cluster slots in order; unfilled slots stay AI.
 
-All state lives in `sphere.db` (SQLite, WAL mode) — back up that one file
-and you've backed up every universe.
+All state lives in **`sphere.db`** (SQLite, WAL mode) — back up that one
+file and you've backed up every universe.
 
 - `PORT=1234 npm start` — change the port.
 - `DEV_TICK=1 npm start` — enables `POST /api/dev/tick {id, n}` to
   fast-forward a game while testing. Never run this in production.
 
-## Playing with friends over the internet
+### Playing with friends over the internet
 
 **ngrok (quickest):**
 ```bash
@@ -62,16 +169,7 @@ WantedBy=multi-user.target
 Put nginx/caddy in front for HTTPS if you want browser notifications to
 work away from localhost.
 
-## What's multiplayer right now
-
-- Shared universe: one tick clock, one AI world of 25 clusters / 199 rivals.
-- Friends appear in your cluster (Galaxy screen), the universe map,
-  rankings, and the news feed.
-- **Aid convoys to friends actually transfer resources** (800 ore /
-  800 crystal / 400 flux, 12-tick cooldown).
-- Raids, scans, and covert ops against *fellow commanders* are blocked
-  ("not yet allowed") — PvP is the designed next phase, alongside joint
-  defense against raids and in-game chat.
+---
 
 ## How it's put together
 
@@ -79,9 +177,17 @@ work away from localhost.
 |---|---|
 | `game.js` | All game rules as pure functions over a universe object — the single source of truth, runs only on the server. |
 | `server.js` | Express + better-sqlite3: accounts (scrypt-hashed passwords), sessions, invite codes, lazy tick catch-up on every request plus a 5s background pump. |
-| `public/index.html` | The client — generated from `../starsphere.html` by `make-client.py`. Rendering is identical to single-player; persistence and actions go through `/api`. |
-| `make-client.py` | Regenerates the client after you change `../starsphere.html` (run `python3 make-client.py`). |
+| `public/index.html` | The client — rendering is identical to single-player; persistence and actions go through `/api`. |
+| `make-client.py` | Regenerates `public/index.html` from the single-player `starsphere.html`. |
 
-The client polls game state every 5 seconds (the game ticks at most once
-a minute, so that's plenty) and re-renders only when the tick advances.
-Every action is validated server-side; the browser is just a viewer.
+The client polls game state every 5 seconds and re-renders only when the
+tick advances; a Server-Sent-Events stream pushes instant updates on
+ticks and other players' actions. **Every action is validated
+server-side — the browser is just a viewer.**
+
+## Security & data
+
+Passwords are **scrypt-hashed** with per-user salts; sessions are random
+crypto tokens. There are no third-party API keys. The local database
+(`sphere.db` and its WAL sidecars) holds real accounts and live session
+tokens and is **git-ignored** — never commit it.
